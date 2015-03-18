@@ -23,22 +23,28 @@ function boxHandler(select) {
 }
 
 function dataValidation() {
-	var distance = document.getElementById('radius').value;
+	var distance;
+	var result = document.getElementById('result');
 	var option = document.getElementById('menu').selectedIndex;
-	alert(option);
-	if(option == '1' && (isNaN(distance) || distance < 1)) {
-		var err = document.getElementById('result');
-		alert("Does that look like a goddamn valid answer?");
-		document.getElementById('distance').value = "";
+	if(option == '0') {
+		result.innerHTML = "<p id='error'> Does that look like a goddamn valid answer? </p>";
 		return false;
-	} else if(option != '1' || option != '2') {
-		alert("Does that look like a goddamn valid answer?");
-		return false;
-	} else {
+	} else if (option == '1') {
+		distance = document.getElementById('radius').value;
 		distance = Number(distance);
+		if(isNaN(distance) || distance < 1) {
+			//sort by prominence has errors
+			result.innerHTML = "<p id='error'> Does that look like a goddamn valid answer? </p>";
+			document.getElementById('distance').value = "";
+			return false;
+		}
+		result.innerHTML = "";
 		distance *= 1609.344; //convert miles to meters
 		distance = distance.toString();
 		alert("Distance: " + distance + "\nLat+Long: " + lat.value + " " + _long.value);
-		//make request to google api
+		//make request to google api (sort by prominence)
+	} else {
+		result.innerHTML = "";
+		//make a request to google api (sort by distance)
 	}
 }

@@ -3,44 +3,30 @@
 	<head>
 		<meta charset='UTF-8'>
 	
-		<link rel='stylesheet' type='text/css' href='style.css'>
-	
 		<title> What the Fuck is Open? </title>
 
 	</head>
 	<body onpageshow='getLocation()'>	
-		<div class='flexcontainer'>
-			<div class='flexchild'>
-				<h1 id="heading"> WHAT THE FUCK IS OPEN? </h1>
-			</div>
+		<h1 id="heading"> WHAT THE FUCK IS OPEN? </h1>
+		<br />
+
+		<form id='form1' action='javascript:dataValidation()'>
+			<label id='labelname'> Would you like to sort by popularity or distance? </label>
 			<br />
+			<select id='menu' name='option1' onchange='boxHandler(this)'>
+				<option value=""> Fucking Pick a Thing </option>
+				<option value="prominence"> Sort by Popularity </option>
+				<option value="distance"> Sort by Distance </option>
+			</select>
+			<br />
+			<div id='distancebox' class='flexchild'>
+				<span id='text'></span>
+			</div>	
+			<input type='submit' id='button' value='Just tell me what the fuck is open.'>				
+		</form>
+		<input type='text' id='lat' name='lat' style="visibility:hidden"/>
+		<input type='text' id='long' name='long'style="visibility:hidden"/>
 
-			<form id='form1'>
-				<div class='flexchild'>
-					<label id='labelname'> Would you like to sort by popularity or distance? </label>
-					<br />
-				</div>
-				<div class='flexchild'>
-					<select id='menu' name='option1' onchange='boxHandler(this)'>
-						<option value=""> Fucking Pick a Thing </option>
-						<option value="prominence"> Sort by Popularity </option>
-						<option value="distance"> Sort by Distance </option>
-					</select>
-					<br />
-				</div>
-				<div id='distancebox' class='flexchild'>
-					<span id='text'></span>
-				</div>
-				<div class='flexchild'>
-					<input type='submit' id='button' onclick='return dataValidation();' value='Just tell me what the fuck is open.'>				
-				</div>
-			</form>
-			<input type='text' id='lat' name='lat' style="visibility:hidden"/>
-			<input type='text' id='long' name='long'style="visibility:hidden"/>
-		
-
-		</div>
-	
 		<div id='result'></div>
 
 		<script src='handlers.js'></script>
