@@ -19,7 +19,7 @@ function initialize(option, distance) {
 	} else if(option == 'd') {
 		request = {
 			location: user_location,
-			openNow: true,
+			openNow: 'true',
 			rankBy: google.maps.places.RankBy.DISTANCE,
 			types: list_of_types
 		};
@@ -27,32 +27,32 @@ function initialize(option, distance) {
 		alert("How the fuck did you crash this code you twat?");
 		return;
 	}
-	
+
+	infowindow = new google.maps.InfoWindow();	
 	service = new google.maps.places.PlacesService(map);
 	service.nearbySearch(request, callback);
 }
 
 function callback(results, status) {
-	alert('in callback');
 	var result = document.getElementById('result');
 	var p_start = "<p id='error'>";
 	var p_end = "</p>";
-	if(status == google.maps.places.PlaceServiceStatus.ERROR) {
+	if(status == google.maps.places.PlacesServiceStatus.ERROR) {
 		result.innerHTML = p_start + "There was a goddamn problem contacting those google fuckers." + p_end;
 		return;
-	} else if(status == google.maps.places.PlaceServiceStatus.INVALID_REQUEST) {
+	} else if(status == google.maps.places.PlacesServiceStatus.INVALID_REQUEST) {
 		result.innerHTML = p_start + "The motherfucking request was invalid. Fix yo damn code." + p_end;
 		return;
-	} else if(status == google.maps.places.PlaceServiceStatus.OVER_QUERY_LIMIT) {
+	} else if(status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
 		result.innerHTML = p_start + "You're over your query limit" + p_end;
 		return;
-	} else if(status == google.maps.places.PlaceServiceStatus.REQUEST_DENIED) {
+	} else if(status == google.maps.places.PlacesServiceStatus.REQUEST_DENIED) {
 		result.innerHTML = p_start + "This website was banned from using places. Sucks." + p_end;
 		return;
-	} else if(status == google.maps.places.PlaceServiceStatus.ZERO_RESULTS) {
+	} else if(status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
 		result.innerHTML = p_start + "Somehow, literally nothing is open around you." + p_end;
 		return;
-	} else if(status == google.maps.places.PlaceServiceStatus.UNKNOWN_ERROR) {
+	} else if(status == google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR) {
 		result.innerHTML = p_start + "We don't even fucking know what you did." + p_end;
 		return;
 	} else if(status == google.maps.places.PlacesServiceStatus.OK) {

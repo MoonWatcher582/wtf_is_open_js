@@ -1,6 +1,7 @@
 var lat = document.getElementById('lat');
 var _long = document.getElementById('long');
 var map;
+var infowindow;
 var list_of_types = ['bakery',
 			'bar',
 			'cafe',
@@ -10,4 +11,4 @@ var list_of_types = ['bakery',
 			'liquor_store',
 			'meal_delivery',	
 			'meal_takeaway',
-			'restaurant']
+			'restaurant'];
