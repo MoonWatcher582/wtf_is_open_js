@@ -1,6 +1,3 @@
-var lat = document.getElementById('lat');
-var _long = document.getElementById('long');
-
 function displayPosition(position) {
 	//alert("Lat: " + position.coords.latitude + ", Long: " + position.coords.longitude);
 	lat.setAttribute('value', position.coords.latitude);

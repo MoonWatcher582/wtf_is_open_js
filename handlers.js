@@ -41,10 +41,10 @@ function dataValidation() {
 		result.innerHTML = "";
 		distance *= 1609.344; //convert miles to meters
 		distance = distance.toString();
-		alert("Distance: " + distance + "\nLat+Long: " + lat.value + " " + _long.value);
-		//make request to google api (sort by prominence)
+		//alert("Distance: " + distance + "\nLat+Long: " + lat.value + " " + _long.value);
+		initialize('p', distance);
 	} else {
 		result.innerHTML = "";
-		//make a request to google api (sort by distance)
+		initialize('d', -1);
 	}
 }

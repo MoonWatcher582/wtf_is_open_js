@@ -1,10 +1,18 @@
 <!DOCTYPE HTML>
 <html lang='en'>
 	<head>
+		<meta name='viewport' content='initial-scale=1.0, user-scalable=no'>		
+
 		<meta charset='UTF-8'>
 	
 		<title> What the Fuck is Open? </title>
 
+		<style>
+			#map {
+				width: 500px;
+				height: 400px;
+			}
+		</style>
 	</head>
 	<body onpageshow='getLocation()'>	
 		<h1 id="heading"> WHAT THE FUCK IS OPEN? </h1>
@@ -27,9 +35,14 @@
 		<input type='text' id='lat' name='lat' style="visibility:hidden"/>
 		<input type='text' id='long' name='long'style="visibility:hidden"/>
 
+		<div id='map'></div>
 		<div id='result'></div>
 
+		<script src='globals.js'></script>
 		<script src='handlers.js'></script>
 		<script src='geolocation.js'></script>
+		<script src='data_search.js'></script>
+		<script src='https://maps.googleapis.com/maps/api/js?libraries=places'></script>
+		<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
 	</body>
 </html>
