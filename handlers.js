@@ -26,6 +26,7 @@ function dataValidation() {
 	var distance;
 	var result = document.getElementById('result');
 	var option = document.getElementById('menu').selectedIndex;
+	open.innerHTML = "";
 	if(option == '0') {
 		result.innerHTML = "<p id='error'> Does that look like a goddamn valid answer? </p>";
 		return false;

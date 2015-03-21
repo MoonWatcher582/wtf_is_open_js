@@ -64,7 +64,10 @@ function callback(results, status, pagination) {
 function buildList(results) {
 	for(var i = 0; i < results.length; i++) {
 		createMarker(results[i]);
-		addToDiv(results[i]);
+		var request = {
+			placeId: results[i].place_id
+		};
+		service.getDetails(request, addToDiv);
 	}
 }
 
@@ -81,9 +84,33 @@ function createMarker(place) {
 	});
 }
 
-function addToDiv(place) {
+function addToDiv(place, status) {
+	if(status !== google.maps.places.PlacesServiceStatus.OK) {
+		return;
+	}
+
+	var photo;
+	if(place.photos) {
+		photo = "<img class='elemPhoto' src=" + place.photos[0].getUrl({'maxWidth':100, 'maxHeight':100}) + ">";
+	} else {
+		photo = "";
+	}
+
 	var newElement = document.createElement('div');
-	newElement.innerHTML = "<p class='listElement'>" + place.name + "</p>" + "<p class='vicinity'>" + place.vicinity + "</p>" + "<br />";
+	var name = "<p class='elemName'>" + place.name + "</p>";
+	var phone = "<p class='elemPhone'>" + place.formatted_phone_number + "</p>";
+	var vicinity = "<p class='elemvicinity'>" + place.vicinity + "</p>";
+	var website;
+	if(place.website) {	
+		website  = "<a class='elemWebsite' href='" + place.website + "'>" + "Website" + "</a>";
+	} else if(place.url) {
+		website  = "<a class='elemWebsite' href='" + place.url + "'>" + "Website" + "</a>";
+	} else {
+		website = "";
+	}
+	newElement.innerHTML = photo + name + phone + vicinity + website + "<br />";
+
 	open.appendChild(newElement);
 }
+
 google.maps.event.addDomListener(window, 'load', initialize);
