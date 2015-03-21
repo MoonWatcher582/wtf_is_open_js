@@ -3,7 +3,7 @@ function initialize(option, distance) {
 
 	var map_options = {
 		center: user_location,
-		zoom: 15
+		zoom: 12
 	};
 	map = new google.maps.Map(document.getElementById('map'), map_options);
 	
@@ -33,7 +33,7 @@ function initialize(option, distance) {
 	service.nearbySearch(request, callback);
 }
 
-function callback(results, status) {
+function callback(results, status, pagination) {
 	var result = document.getElementById('result');
 	var p_start = "<p id='error'>";
 	var p_end = "</p>";
@@ -56,10 +56,15 @@ function callback(results, status) {
 		result.innerHTML = p_start + "We don't even fucking know what you did." + p_end;
 		return;
 	} else if(status == google.maps.places.PlacesServiceStatus.OK) {
-		result.innerHTML = "<p id='list'>" + "Here's what the fuck is open" + "</p>";
-		for(var i = 0; i < results.length; i++) {
-			createMarker(results[i]);
-		}
+		result.innerHTML = "<p id='listStart'>" + "Here's what the fuck is open" + "</p>";
+		buildList(results);
+	}
+}
+
+function buildList(results) {
+	for(var i = 0; i < results.length; i++) {
+		createMarker(results[i]);
+		addToDiv(results[i]);
 	}
 }
 
@@ -76,4 +81,9 @@ function createMarker(place) {
 	});
 }
 
+function addToDiv(place) {
+	var newElement = document.createElement('div');
+	newElement.innerHTML = "<p class='listElement'>" + place.name + "</p>" + "<p class='vicinity'>" + place.vicinity + "</p>" + "<br />";
+	open.appendChild(newElement);
+}
 google.maps.event.addDomListener(window, 'load', initialize);

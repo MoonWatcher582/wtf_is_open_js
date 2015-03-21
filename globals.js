@@ -1,5 +1,6 @@
 var lat = document.getElementById('lat');
 var _long = document.getElementById('long');
+var open = document.getElementById('open');
 var map;
 var infowindow;
 var list_of_types = ['bakery',
